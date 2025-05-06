@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Card Detective</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="orientation-warning">
+    <p>Please rotate your device to <strong>landscape</strong> mode to play.</p>
+  </div>
+
+  <div class="container">
+    <header>
+        <h1>Card Detective</h1>
+    </header>
+    <main>
+      <div class="card-display">
+        <button id="prevBtn">◀</button>
+        <div id="cardText">Card 1</div>
+        <button id="nextBtn">▶</button>
+      </div>
+      <div>
+        <p class="attempts" id="attempts"><strong id="heart">5</strong> Attempts Remaining</p>
+      </div>
+      <div class="instruction-bar">
+        <button id="miniGrid">Go To</button>
+        <button id="submitBtn">Submit</button>
+      </div>
+    </main>
+    <div id="popup"></div>
+  </div>
+    
+  <div class="card-container" style="display: none">
+    <img id="cardImage" src="cards/1.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/2.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/3.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/4.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/5.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/6.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/7.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/8.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/9.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/10.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/11.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/12.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/13.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/14.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/15.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/16.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/17.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/18.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/19.jpg" alt="Card Image"/>
+    <img id="cardImage" src="cards/20.jpg" alt="Card Image"/>
+  </div>
+
+  <audio id="sound-correct" src="sounds/correct.mp3" preload="auto"></audio>
+  <audio id="sound-incorrect" src="sounds/wrong.mp3" preloaf="auto"></audio>
+  <audio id="sound-gameover" src="sounds/gameover.mp3" preloaf="auto"></audio>
+  
+  <script src="script.js"></script>
+</body>
+</html>
