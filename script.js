@@ -54,12 +54,22 @@ submitBtn.addEventListener('click', () => {
 
   if (attemptsLeft <= 0 && !isCorrect) {
     showPopup("GAME OVER!", false);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     playSound(soundGameOver);
     updateAttemptsDisplay();
     return;
   }
 
   showPopup(isCorrect ? "CORRECT!" : "TRY AGAIN!", isCorrect);
+  if (isCorrect) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+  });
+  }
   isCorrect? playSound(soundCorrect) : playSound(soundIncorrect);
   updateAttemptsDisplay();
 });
