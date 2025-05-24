@@ -1,5 +1,6 @@
 const popup = document.getElementById('popup');
 const cardText = document.getElementById('cardText');
+const img = document.getElementById('cardImage');
 const miniGrid = document.getElementById('miniGrid');
 const submitBtn = document.getElementById('submitBtn');
 const attemptsEl = document.getElementById("attempts");
@@ -20,10 +21,6 @@ function playSound(sound) {
   sound.play();
 }
 
-function updateCardDisplay() {
-  cardText.textContent = `Card ${currentCard}`;
-}
-
 function updateAttemptsDisplay() {
   attemptsEl.innerHTML = `<strong id="heart" style="color: ${attemptsLeft > 1 ? '#4CAF50' : 'red'}">${attemptsLeft}</strong> Attempt${attemptsLeft !== 1 ? 's' : ''} Remaining`;
 }
@@ -42,8 +39,8 @@ function showPopup(message, isSuccess) {
 }
 
 function updateCardDisplay() {
-  cardText.innerHTML = `<img id="cardImage" src="cards/${currentCard}.png" alt="Card Image" style="width: 35%; border-radius: 10px; margin-bottom: 10px;" />
-  <div id="cardText">Card ${currentCard}</div>`;
+  img.src = `cards/${currentCard}.png`;
+  cardText.textContent = `Card ${currentCard}`;
 }
 
 submitBtn.addEventListener('click', () => {
