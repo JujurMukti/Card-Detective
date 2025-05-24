@@ -11,7 +11,7 @@ const soundGameOver = document.getElementById("sound-gameover");
 let currentCard = 1;
 let attemptsLeft = 3;
 let playPopup = false;
-const correctCards = [1, 12];
+const correctCards = [7, 18];
 
 function playSound(sound) {
   sound.pause();
@@ -42,7 +42,7 @@ function showPopup(message, isSuccess) {
 }
 
 function updateCardDisplay() {
-  cardText.innerHTML = `<img id="cardImage" src="cards/${currentCard}.jpg" alt="Card Image" style="width: 50%; border-radius: 8px; margin-bottom: 10px;" />
+  cardText.innerHTML = `<img id="cardImage" src="cards/${currentCard}.png" alt="Card Image" style="width: 35%; border-radius: 10px; margin-bottom: 10px;" />
   <div id="cardText">Card ${currentCard}</div>`;
 }
 

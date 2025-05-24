@@ -17,7 +17,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #222;
+  background-color: #017878;
   color: white;
 }
 
@@ -34,7 +34,7 @@ body {
   }
   
 #heart {
-    color: #4CAF50;
+    color: #6b9a40;
   }
 
 .card-display {
@@ -44,6 +44,7 @@ body {
     gap: 1.5rem;
     margin: 1.5rem 0;
   }
+  
   
 #cardText {
     font-size: 1.5rem;
@@ -57,7 +58,7 @@ button {
     margin: 8px;
     font-size: 1rem;
     border: none;
-    background: #4CAF50;
+    background: #007bff;
     color: white;
     border-radius: 10px;
     cursor: pointer;
@@ -66,7 +67,7 @@ button {
   }
   
 button:hover {
-    background: #45a049;
+    background: #6b9a40;
     transform: scale(1.05);
   }
 
