@@ -4,15 +4,18 @@ const img = document.getElementById('cardImage');
 const miniGrid = document.getElementById('miniGrid');
 const submitBtn = document.getElementById('submitBtn');
 const attemptsEl = document.getElementById("attempts");
+const easterEgg = document.getElementById("easter");
 
 const soundCorrect = document.getElementById("sound-correct");
 const soundIncorrect = document.getElementById("sound-incorrect");
 const soundGameOver = document.getElementById("sound-gameover");
 
+const correctCards = [7, 18];
+
+let revealedCard = [];
 let currentCard = 1;
 let attemptsLeft = 3;
 let playPopup = false;
-const correctCards = [7, 18];
 
 function playSound(sound) {
   sound.pause();
@@ -40,48 +43,17 @@ function showPopup(message, isSuccess) {
 
 function updateCardDisplay() {
   img.src = `cards/${currentCard}.png`;
-  cardText.textContent = `Card ${currentCard}`;
+  if (revealedCard.includes(currentCard)) {
+    const color = correctCards.includes(currentCard) ? '#6b9a40' : 'red';
+    cardText.innerHTML = `Card ${currentCard} <span style="color: ${color};">(Revealed)</span>`;
+    submitBtn.disabled = true;
+  } else {
+    cardText.textContent = `Card ${currentCard}`;
+    submitBtn.disabled = false;
+  }
 }
 
-submitBtn.addEventListener('click', () => {
-  if (playPopup) return;
-
-  const isCorrect = correctCards.includes(currentCard);
-  if (!isCorrect) attemptsLeft--;
-
-  if (attemptsLeft <= 0 && !isCorrect) {
-    showPopup("GAME OVER!", false);
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-    playSound(soundGameOver);
-    updateAttemptsDisplay();
-    return;
-  }
-
-  showPopup(isCorrect ? "CORRECT!" : "TRY AGAIN!", isCorrect);
-  if (isCorrect) {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-  });
-  }
-  isCorrect? playSound(soundCorrect) : playSound(soundIncorrect);
-  updateAttemptsDisplay();
-});
-
-document.getElementById('prevBtn').addEventListener('click', () => {
-  currentCard = currentCard === 1 ? 20 : currentCard - 1;
-  updateCardDisplay();
-});
-
-document.getElementById('nextBtn').addEventListener('click', () => {
-  currentCard = currentCard === 20 ? 1 : currentCard + 1;
-  updateCardDisplay();
-});
-
-miniGrid.addEventListener('click', () => {
+function showMiniGrid(kind) {
   const overlay = document.createElement('div');
   overlay.id = 'overlayGrid';
   overlay.style.position = 'fixed';
@@ -133,7 +105,7 @@ miniGrid.addEventListener('click', () => {
   const bigGrid = document.createElement('div');
   bigGrid.style.display = 'grid';
   bigGrid.style.gridTemplateColumns = 'repeat(5, 60px)';
-  bigGrid.style.gridGap = '15px';
+  bigGrid.style.gap = '15px';
   bigGrid.style.marginTop = '40px';
 
   for (let i = 1; i <= 20; i++) {
@@ -150,7 +122,11 @@ miniGrid.addEventListener('click', () => {
     cell.style.fontSize = '18px';
     cell.style.height = '40px';
     cell.addEventListener('click', () => {
-      currentCard = i;
+      if (kind === 0) {
+        currentCard = i;
+      } else {
+        revealedCard.push(i);
+      }
       updateCardDisplay();
       overlay.style.animation = 'fadeOut 0.3s ease';
       setTimeout(() => document.body.removeChild(overlay), 300);
@@ -162,6 +138,54 @@ miniGrid.addEventListener('click', () => {
   container.appendChild(bigGrid);
   overlay.appendChild(container);
   document.body.appendChild(overlay);
+}
+
+submitBtn.addEventListener('click', () => {
+  if (playPopup) return;
+
+  revealedCard.push(currentCard);
+  updateCardDisplay();
+  const isCorrect = correctCards.includes(currentCard);
+  if (!isCorrect) attemptsLeft--;
+
+  if (attemptsLeft <= 0 && !isCorrect) {
+    showPopup("GAME OVER!", false);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    playSound(soundGameOver);
+    updateAttemptsDisplay();
+    return;
+  }
+
+  showPopup(isCorrect ? "CORRECT!" : "TRY AGAIN!", isCorrect);
+  if (isCorrect) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+  });
+  }
+  isCorrect? playSound(soundCorrect) : playSound(soundIncorrect);
+  updateAttemptsDisplay();
+});
+
+easterEgg.addEventListener('click', () => {
+  showMiniGrid(1);
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  currentCard = currentCard === 1 ? 20 : currentCard - 1;
+  updateCardDisplay();
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  currentCard = currentCard === 20 ? 1 : currentCard + 1;
+  updateCardDisplay();
+});
+
+miniGrid.addEventListener('click', () => {
+  showMiniGrid(0);
 });
 
 updateCardDisplay();
